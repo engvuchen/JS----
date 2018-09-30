@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQuery-轮播图</title>
+    <link rel="stylesheet" href="css/1.css">
+    <script src="../../js/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+    <div class="container" style='transition: transform 1s'>
+
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+
+        <div class="left">&lt;</div>
+        <div class="right">&gt;</div>
+        <div class="nav">
+            <div class="items1"></div>
+            <div class="items1"></div>
+            <div class="items1"></div>
+            <div class="items1"></div>
+        </div>
+    </div>
+    <script>
+        var index = 0;
+        var itemsLength = $(".items").length;
+        var arr = [0, 1, 2, 3];
+
+        //焦点轮播
+        $(".items1").eq(0).css({
+            "background-color": "royalblue"
+        });
+
+        $(".items1").hover(function () {
+            index = $(this).index();
+            //console.log(index);
+
+            $(this).css({
+                "background-color": "royalblue"
+            }).siblings().css({
+                "background-color": "rgba(0,0,0,0.5)"
+            });
+
+            /* 
+                1.焦点1 - 第一张 - 0 500 1000 1500
+                2.焦点2 - 第二张 - -500 0 500 1000
+                3.焦点3 - 第三张 - -1000 -500 0 500
+                4.焦点4 - 第四张 - -1500 -1000 -500 0
+                ...
+            */
+
+            /* 
+            index: 0  0 1 2 3 -> 0 1 2 3
+            index: 1          -> -1 0 1 2
+            index: 2          -> -2 -1 0 1
+            index: 3          -> -3 -2 -1 0
+            */
+
+            switch (index) {
+                case 0:
+                    arr = [0, 1, 2, 3];
+                    break;
+                case 1:
+                    arr = [-1, 0, 1, 2];
+                    break;
+                case 2:
+                    arr = [-2, -1, 0, 1];
+                    break;
+                case 3:
+                    arr = [-3, -2, -1, 0];
+                    break;
+            }
+
+            for (var i = 0; i < itemsLength; i++) {
+                (function () {
+                    var temp = i;
+                    $(".items").eq(i).css({
+                        "left": parseInt(500 * arr[temp]) + 'px'
+                    })
+                })();
+            }
+        });
+
+        //方向控制
+        //-1 (0 1 2 3) 4
+        $(".right").on("click", function () {
+            index += 1;
+
+            if (index >= 4) {
+                index = 0;
+
+                //焦点变色
+                $(".items1").eq(index).css({
+                    "background-color": "royalblue"
+                }).siblings().css({
+                    "background-color": "rgba(0,0,0,0.5)"
+                })
+
+                arr = [0, 1, 2, 3];
+                for (var i = 0; i < itemsLength; i++) {
+                    (function () {
+                        var temp = i;
+                        $(".items").eq(i).css({
+                            "left": parseInt(500 * arr[temp]) + 'px'
+                        })
+                    })();
+                }
+            }
+            else {
+                //焦点变色
+                $(".items1").eq(index).css({
+                    "background-color": "royalblue"
+                }).siblings().css({
+                    "background-color": "rgba(0,0,0,0.5)"
+                })
+
+                switch (index) {
+                    case 0:
+                        arr = [0, 1, 2, 3];
+                        break;
+                    case 1:
+                        arr = [-1, 0, 1, 2];
+                        break;
+                    case 2:
+                        arr = [-2, -1, 0, 1];
+                        break;
+                    case 3:
+                        arr = [-3, -2, -1, 0];
+                        break;
+                }
+                for (var i = 0; i < itemsLength; i++) {
+                    (function () {
+                        var temp = i;
+                        $(".items").eq(i).css({
+                            "left": parseInt(500 * arr[temp]) + 'px'
+                        })
+                    })();
+                }
+            }
+        });
+
+        $(".left").on("click", function () {
+            index -= 1;
+            if (index < 0) {
+                index = 3;
+                arr = [-3, -2, -1, 0];
+
+                //焦点变色
+                $(".items1").eq(index).css({
+                    "background-color": "royalblue"
+                }).siblings().css({
+                    "background-color": "rgba(0,0,0,0.5)"
+                })
+
+                for (var i = 0; i < itemsLength; i++) {
+                    (function () {
+                        var temp = i;
+                        $(".items").eq(i).css({
+                            "left": parseInt(500 * arr[temp]) + 'px'
+                        })
+                    })();
+                }
+            } else {
+                //焦点变色
+                $(".items1").eq(index).css({
+                    "background-color": "royalblue"
+                }).siblings().css({
+                    "background-color": "rgba(0,0,0,0.5)"
+                })
+                switch (index) {
+                    case 0:
+                        arr = [0, 1, 2, 3];
+                        break;
+                    case 1:
+                        arr = [-1, 0, 1, 2];
+                        break;
+                    case 2:
+                        arr = [-2, -1, 0, 1];
+                        break;
+                    case 3:
+                        arr = [-3, -2, -1, 0];
+                        break;
+                }
+                for (var i = 0; i < itemsLength; i++) {
+                    (function () {
+                        var temp = i;
+                        $(".items").eq(i).css({
+                            "left": parseInt(500 * arr[temp]) + 'px'
+                        })
+                    })();
+                }
+            }
+        });
+
+        /* 
+            函数封装：
+            1、arr转变
+            2、焦点变化
+            3、轮播图变化
+        */
+
+        function arrChange(index) {
+            switch (index) {
+                case 0:
+                    arr = [0, 1, 2, 3];
+                    break;
+                case 1:
+                    arr = [-1, 0, 1, 2];
+                    break;
+                case 2:
+                    arr = [-2, -1, 0, 1];
+                    break;
+                case 3:
+                    arr = [-3, -2, -1, 0];
+                    break;
+            }
+            return arr;
+        }
+
+        function focusChange() {
+            $(".items1").eq(index).css({
+                "background-color": "royalblue"
+            }).siblings().css({
+                "background-color": "rgba(0,0,0,0.5)"
+            })
+        }
+        
+        function ImgChange(){
+
+        }
+    </script>
+</body>
+
+</html>

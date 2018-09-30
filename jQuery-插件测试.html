@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQuery-轮播图</title>
+    <link rel="stylesheet" href="css/3.css">
+
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jQ-轮播图-插件封装.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <img src="" alt="" class="items">
+    </div>
+    <script>
+        //moveImg(w,h,n,option)
+        var option = [
+            './img/1.jpg',
+            './img/2.jpg',
+            './img/3.jpg',
+            './img/4.jpg',
+            './img/5.jpg',
+            './img/6.jpg',
+            './img/7.jpg'
+            ];
+
+        console.log(option);
+        console.log($(".container"));
+
+        $('.container').moveImg(500,300,7,option);
+
+    </script>
+</body>
+
+</html>
